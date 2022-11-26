@@ -1,0 +1,15 @@
+  apiVersion: v1
+  kind: Service
+  metadata:
+    name: angular-k8s-service
+    labels:
+      name: angular-k8s-deployment
+  spec:
+    ports:
+      - nodePort: 30170 # make the service available to network requests from external clients
+        port: 80        # access the service via external port no
+        targetPort: 80  # port number that container listening on
+        protocol: TCP
+    selector:
+      app: angular-k8s-deployment
+    type: NodePort     # which expose the application on a port across a each of your nodes
